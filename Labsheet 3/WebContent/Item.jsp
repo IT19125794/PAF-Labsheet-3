@@ -3,7 +3,7 @@
 pageEncoding="ISO-8859-1"%>
 
 <%
- //Insert item----------------------------------
+//Insert item---------------------------------
 if (request.getParameter("itemCode") != null)
  {
  Item itemObj = new Item();
@@ -11,6 +11,17 @@ if (request.getParameter("itemCode") != null)
  request.getParameter("itemName"),
  request.getParameter("itemPrice"),
  request.getParameter("itemDesc"));
+ session.setAttribute("statusMsg", stsMsg);
+ }
+
+//Update item----------------------------------
+
+
+//Delete item----------------------------------
+if (request.getParameter("itemID") != null)
+ {
+ Item itemObj = new Item();
+ String stsMsg = itemObj.deleteItem(request.getParameter("itemID"));
  session.setAttribute("statusMsg", stsMsg);
  }
 %>
