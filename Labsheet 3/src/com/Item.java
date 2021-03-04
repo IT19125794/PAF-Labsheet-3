@@ -92,7 +92,7 @@ public class Item {
 	 // buttons
 	 output += "<td><input name='btnUpdate' "
 	 + " type='button' value='Update'></td>"
-	 + "<td><form method='post' action='items.jsp'>"
+	 + "<td><form method='post' action='Item.jsp'>"
 	 + "<input name='btnRemove' "
 	 + " type='submit' value='Remove'>"
 	 + "<input name='itemID' type='hidden' "
@@ -146,7 +146,7 @@ public class Item {
 	 }
 	 
 	 // create a prepared statement
-	 String query = "delete from items where itemID=?";
+	 String query = "delete from item where itemID=?";
 	 PreparedStatement preparedStmt = con.prepareStatement(query);
 	 
 	 // binding values
