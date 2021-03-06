@@ -90,8 +90,11 @@ public class Item {
 	output += "<td>" + itemDesc + "</td>";
 	
 	 // buttons
-	 output += "<td><input name='btnUpdate' "
-	 + " type='button' value='Update'></td>"
+	 output += "<td><form method='post' action='Item.jsp'>"
+	 + "<input name='btnUpdate' "
+	 + " type='button' value='Update'>"
+	 + "<input name='itemID' type='hidden' "
+	 + " value='" + itemID + "'>" + "</form></td>"
 	 + "<td><form method='post' action='Item.jsp'>"
 	 + "<input name='btnRemove' "
 	 + " type='submit' value='Remove'>"
