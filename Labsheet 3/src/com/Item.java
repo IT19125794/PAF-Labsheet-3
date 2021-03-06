@@ -111,12 +111,49 @@ public class Item {
 	return output;
 	}
 	
-	//public String getItems(String itemID) {
+	public String getItem(String itemID) {
 		
-	//}
+		String output = "";
+		try
+		{
+			Connection con = connect();
+			if (con == null)
+			{
+				return "Error while connecting to the database for deleting.";
+			}
+			
+			// create a prepared statement
+			String query = "select * from item where itemID=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			// binding values
+			preparedStmt.setInt(1, Integer.parseInt(itemID));
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			while(rs.next()) {
+				output = "<form method = 'post' action = 'Item.jsp'>"
+							+"Item code: <input name='itemCode' type='text'"+" value='" + rs.getString("itemCode") + "'><br>"
+ 							+"Item name: <input name='itemName' type='text'"+" value='" + rs.getString("itemName") + "'><br>"
+ 							+"Item price: <input name='itemPrice' type='text'"+" value='" + Double.toString(rs.getDouble("itemPrice")) + "'><br>"
+ 							+"Item description: <input name='itemDesc' type='text'"+" value='" + rs.getString("itemDesc") + "'><br>"
+ 							+"<form method='post' action='Item.jsp'>"
+ 							+"<input name='btnSubmit' type='submit' value='Save'>"
+ 							+"<input name='itemID' type='hidden' " + " value='" + itemID + "'>" + "</form><br>";
+			}
+			con.close();
+			
+		}
+		catch (Exception e)
+		 {
+		 output = "Error while updating the item.";
+		 System.err.println(e.getMessage());
+		 }
+		return output;
+	}
 	
-	/*public String update(String itemID) {
+	public String updateItem(String code, String name, String price, String desc) {
 		
+		String output = "";
 		try
 		 {
 		 Connection con = connect();
@@ -125,14 +162,23 @@ public class Item {
 			 return "Error while connecting to the database";
 		 }
 		 
+		// create a prepared statement
+		 String query = "update item set itemCode=?, itemName=?, itemPrice=?, itemDesc=? where itemID=?";
+		 PreparedStatement preparedStmt = con.prepareStatement(query);
+		 
+		 //execute the statement
+		 preparedStmt.execute();
+		 con.close();
+		 output = "Updated successfully";
+		 
 		 }
 		catch (Exception e)
-		 /*{
+		 {
 		 output = "Error while updating the item.";
 		 System.err.println(e.getMessage());
 		 }
 		return output;
-	}*/
+	}
 	
 	public String deleteItem(String itemID)
 	{

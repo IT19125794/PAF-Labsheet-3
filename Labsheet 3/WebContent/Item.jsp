@@ -15,7 +15,15 @@ if (request.getParameter("itemCode") != null)
  }
 
 //Update item----------------------------------
-
+if (request.getParameter("itemID") != null)
+ {
+ Item itemObj = new Item();
+ String stsMsg2 = itemObj.updateItem(request.getParameter("itemCode"),
+request.getParameter("itemName"),
+request.getParameter("itemPrice"),
+request.getParameter("itemDesc"));
+ session.setAttribute("statusMsg", stsMsg2);
+ }
 
 //Delete item----------------------------------
 if (request.getParameter("itemID") != null)
